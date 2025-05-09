@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Chat Widget Example</title>
+    <link rel="stylesheet" href="/static/chat-widget.css">
+</head>
+<body>
+
+<div id="ai-chat-widget">
+    <button id="chat-button">💬 AI</button>
+
+    <div id="chat-window">
+        <div id="chat-header">
+            <span>AI Assistant</span>
+            <span>
+                <span id="minimize-chat" class="chat-icon">🗕</span>
+                <span id="close-chat" class="chat-icon">❌</span>
+            </span>
+        </div>
+        <div id="chat-messages">
+            <div class="chat-message bot">Hello, I'm your AI assistance. Please put your question in the chat prompt.</div>
+        </div>
+        <div id="chat-input">
+            <input type="text" id="chat-user-input" placeholder="Type your message...">
+            <button id="send-chat">Send</button>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="/static/chat-widget.js"></script>
+</body>
+</html>
+
