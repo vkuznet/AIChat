@@ -64,17 +64,24 @@ function sendMessage(chatInput, chatMessages) {
     chatInput.value = '';
     resetInactivityTimer();
 
+    // Add loading indicator
+    const loadingMsg = document.createElement('div');
+    loadingMsg.classList.add('chat-message', 'bot');
+    loadingMsg.innerHTML = '<span class="loading-dots">...</span>';
+    chatMessages.appendChild(loadingMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
     fetch('/api/chat', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: userInput})
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userInput })
     })
     .then(response => response.json())
     .then(data => {
-        appendMessage(data.reply || 'No response from server.', 'bot', chatMessages);
+        loadingMsg.textContent = data.reply || 'No response from server.';
     })
     .catch(() => {
-        appendMessage('Error contacting server.', 'bot', chatMessages);
+        loadingMsg.textContent = 'Error contacting server.';
     });
 }
 
