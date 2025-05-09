@@ -2,6 +2,7 @@ let inactivityTimer;
 const maxMessages = 20;
 const inactivityTimeout = 5 * 60 * 1000; // 5 min
 
+
 function initChatWidget() {
     const chatButton = document.getElementById('chat-button');
     const chatWindow = document.getElementById('chat-window');
@@ -11,13 +12,23 @@ function initChatWidget() {
     const minimizeButton = document.getElementById('minimize-chat');
     const closeButton = document.getElementById('close-chat');
 
-    chatButton.addEventListener('click', () => openChat(chatWindow));
+    // Update: toggle on AI button
+    chatButton.addEventListener('click', () => toggleChat(chatWindow));
+
     minimizeButton.addEventListener('click', () => minimizeChat(chatWindow));
     closeButton.addEventListener('click', () => closeChat(chatWindow, chatMessages));
     sendButton.addEventListener('click', () => sendMessage(chatInput, chatMessages));
     chatInput.addEventListener('keypress', e => {
         if (e.key === 'Enter') sendMessage(chatInput, chatMessages);
     });
+}
+
+function toggleChat(chatWindow) {
+    if (chatWindow.style.display === 'flex') {
+        minimizeChat(chatWindow);
+    } else {
+        openChat(chatWindow);
+    }
 }
 
 function openChat(chatWindow) {
